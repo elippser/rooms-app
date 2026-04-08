@@ -17,9 +17,11 @@ const API_BASE =
   process.env.NEXT_PUBLIC_HABITACIONES_API_URL ?? "http://localhost:4040";
 
 function headers(token: string) {
+  const t = token.trim();
   return {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${t}`,
+    "X-Access-Token": t,
   };
 }
 

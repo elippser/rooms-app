@@ -12,6 +12,16 @@ interface JwtPayload {
   email?: string;
 }
 
+/** Query string puede corromper JWT base64 (+ → espacio). El padre debe usar encodeURIComponent(token). */
+function normalizeTokenFromQuery(raw: string): string {
+  if (!raw) return "";
+  try {
+    return decodeURIComponent(raw).replace(/\s+/g, "+").trim();
+  } catch {
+    return raw.replace(/\s+/g, "+").trim();
+  }
+}
+
 function getRoleFromToken(token: string): "owner" | "admin" | "staff" {
   if (!token) return "staff";
   try {
@@ -30,7 +40,7 @@ export function useAppContext(): AppContext & { isReady: boolean } {
   return useMemo(() => {
     const companyId = params.get("companyId") ?? "";
     const propertyId = params.get("propertyId") ?? "";
-    const token = params.get("token") ?? "";
+    const token = normalizeTokenFromQuery(params.get("token") ?? "");
     const spaceId = params.get("spaceId") ?? undefined;
     const role = getRoleFromToken(token);
 
