@@ -1,0 +1,43 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: transform 0.15s;
+}
+
+.badge:hover {
+  transform: scale(1.04);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.available { background: rgba(34, 197, 94, 0.13); color: #15803d; }
+.available .dot { background: var(--status-available); color: var(--status-available); animation: pulseRing 2s ease-out infinite; }
+
+.occupied { background: rgba(239, 68, 68, 0.11); color: #b91c1c; }
+.occupied .dot { background: var(--status-occupied); color: var(--status-occupied); animation: pulseRing 2s ease-out infinite; }
+
+.cleaning { background: rgba(234, 179, 8, 0.14); color: #a16207; }
+.cleaning .dot { background: var(--status-cleaning); color: var(--status-cleaning); animation: pulseRing 2s ease-out infinite; }
+
+.maintenance { background: rgba(249, 115, 22, 0.13); color: #c2410c; }
+.maintenance .dot { background: var(--status-maintenance); color: var(--status-maintenance); }
+
+.blocked { background: rgba(107, 114, 128, 0.12); color: #374151; }
+.blocked .dot { background: var(--status-blocked); }
+
+.checkout-pending { background: rgba(168, 85, 247, 0.12); color: #7c3aed; }
+.checkout-pending .dot { background: var(--status-checkout-pending); color: var(--status-checkout-pending); animation: pulseRing 2s ease-out infinite; }

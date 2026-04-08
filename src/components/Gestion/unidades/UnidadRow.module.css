@@ -1,0 +1,66 @@
+.row {
+  display: grid;
+  grid-template-columns: 80px 1fr 60px 120px 100px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-default);
+  font-size: 13px;
+  transition: background 0.15s;
+}
+
+.row:hover {
+  background: var(--bg-surface-hover);
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.name {
+  color: var(--text-primary);
+}
+
+.floor {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.editBtn {
+  background: var(--accent-soft);
+  color: var(--accent-color);
+  border: none;
+}
+
+.editBtn:hover {
+  background: var(--accent-color);
+  color: var(--accent-contrast, #fff);
+  transform: translateY(-1px);
+}
+
+.deleteBtn {
+  background: none;
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+}
+
+.deleteBtn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.06);
+}

@@ -1,0 +1,142 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: slideUp 0.3s ease-out;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.floorSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  transition: border-color 0.2s;
+  animation: fadeIn 0.35s ease-out backwards;
+}
+
+.floorSection:nth-child(2) { animation-delay: 0.04s; }
+.floorSection:nth-child(3) { animation-delay: 0.08s; }
+.floorSection:nth-child(4) { animation-delay: 0.12s; }
+
+.floorSection:hover {
+  border-color: var(--border-strong);
+}
+
+.floorHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.floorLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 60px;
+}
+
+.barTrack {
+  flex: 1;
+  height: 12px;
+  background: var(--border-default);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--status-occupied);
+  transition: width 0.5s ease;
+  animation: barGrow 0.6s ease-out;
+}
+
+.occupancyLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+  min-width: 110px;
+  text-align: right;
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+.miniGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.miniUnit {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+
+.miniUnit:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+}
+
+.miniUnit:active {
+  transform: scale(1.05);
+}
+
+.miniUnitSelected {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.tooltip {
+  font-size: 11px;
+}
+
+.loading {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--text-muted);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.errorBox {
+  padding: 14px 16px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-left: 3px solid var(--danger);
+  border-radius: var(--radius-md);
+  color: #991b1b;
+  font-size: 14px;
+  animation: slideDown 0.2s ease-out;
+}
+
+.empty {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.invalidCtx {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--danger);
+  font-size: 14px;
+  font-weight: 600;
+}
