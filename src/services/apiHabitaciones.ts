@@ -25,6 +25,15 @@ function headers(token: string) {
   };
 }
 
+/** Respaldo para GET en iframe/cross-origin si Authorization no llega al origin de la API. */
+function withAccessTokenQuery(url: string, token: string): string {
+  const t = token.trim();
+  if (!t) return url;
+  const u = new URL(url);
+  u.searchParams.set("access_token", t);
+  return u.toString();
+}
+
 function unitsUrl(propertyId: string, ...segments: string[]) {
   return `${API_BASE}/api/v1/properties/${propertyId}/units${segments.length ? "/" + segments.join("/") : ""}`;
 }
@@ -48,7 +57,7 @@ export async function getCategories(
   token: string,
   propertyId: string,
 ): Promise<Category[]> {
-  return request<Category[]>(categoriesUrl(propertyId), {
+  return request<Category[]>(withAccessTokenQuery(categoriesUrl(propertyId), token), {
     headers: headers(token),
   });
 }
@@ -58,7 +67,7 @@ export async function getCategory(
   propertyId: string,
   categoryId: string,
 ): Promise<Category> {
-  return request<Category>(categoriesUrl(propertyId, categoryId), {
+  return request<Category>(withAccessTokenQuery(categoriesUrl(propertyId, categoryId), token), {
     headers: headers(token),
   });
 }
@@ -105,7 +114,7 @@ export async function getUnitsState(
   token: string,
   propertyId: string,
 ): Promise<Unit[]> {
-  return request<Unit[]>(unitsUrl(propertyId, "states"), {
+  return request<Unit[]>(withAccessTokenQuery(unitsUrl(propertyId, "states"), token), {
     headers: headers(token),
   });
 }
@@ -119,6 +128,7 @@ export async function getUnits(
   if (params?.code?.trim()) {
     url.searchParams.set("code", params.code.trim());
   }
+  url.searchParams.set("access_token", token.trim());
   return request<Unit[]>(url.toString(), {
     headers: headers(token),
   });
@@ -166,7 +176,7 @@ export async function getUnit(
   propertyId: string,
   unitId: string,
 ): Promise<Unit> {
-  return request<Unit>(unitsUrl(propertyId, unitId), {
+  return request<Unit>(withAccessTokenQuery(unitsUrl(propertyId, unitId), token), {
     headers: headers(token),
   });
 }
@@ -215,9 +225,12 @@ export async function getUnitHistory(
   propertyId: string,
   unitId: string,
 ): Promise<UnitStateHistory[]> {
-  return request<UnitStateHistory[]>(unitsUrl(propertyId, unitId, "history"), {
-    headers: headers(token),
-  });
+  return request<UnitStateHistory[]>(
+    withAccessTokenQuery(unitsUrl(propertyId, unitId, "history"), token),
+    {
+      headers: headers(token),
+    },
+  );
 }
 
 export async function deleteUnit(
